@@ -1,0 +1,358 @@
+
+
+
+{{> admin/header}}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Schedule Management</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+            <li class="breadcrumb-item active">Schedule list</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+
+          <!-- /.card-header -->
+          <div class="card-body p-3 table-responsive p-0">
+            {{!-- <div class="add-button d-flex justify-content-end">
+              
+              <a class="btn btn-primary mb-3 mr-3 btn-goback" id="addBtn" data-toggle="modal" data-target="#addSchedule">Add
+                Schedule</a>
+            </div> --}}
+            <table class="table table-hover text-nowrap" id="scheduleTable">
+              <thead>
+                <tr>
+                  <th>Sl.no</th>
+                  <th>Doctor Name</th>
+                  <th>Schedule Date</th>
+                <th class="col-md-6">Slots</th>
+                  {{!-- <th>Status</th> --}}
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each doctorschedules}}
+                 {{#if this.schedule.slots.length}}
+                <tr id="sched-id" >
+                
+                  <td>{{inc @index}}</td>
+                  <td>{{this.firstname}}</td>
+                  <td>{{this.schedule.date}}</td>
+                     <td class=" d-flex flex-wrap">
+                   {{#each this.schedule.slots}}
+  {{#if this.isBooked}}
+                  <a  class="badge badge-secondary text-light m-1 text-right" >
+                  {{this.time}}</a> 
+                  {{else}}
+<a class="badge badge-primary text-light m-1">{{this.time}}</a>
+{{/if}}
+{{/each}}
+                </td>
+                 
+                  {{!-- <td>
+                    {{#if this.isActive}}
+                    <a class="btn btn-outline-success" href="/doctors/unblock-sched/{{this._id}}">Active</a>
+                    {{else}}
+                    <a class="btn  btn-outline-danger" href="/doctors/block-sched/{{this._id}}">Inactive</a>
+                    {{/if}}
+                  </td> --}}
+                   
+                  <td>
+                
+                    {{!-- <button class="btn text-primary editBtn" value="{{this.schedule._id}}" id="editSchedule-btn"  data-target="#editSchedule" data-toggle="modal"
+                     ><i class="fas fa-pen"></i></button> --}}
+                      <input class="d-none" type="text" id="iduser" value="{{this._id}}">
+                    <a class="btn text-danger" href="/admin/delete-schedule/{{this.schedule._id}}&{{this._id}}"
+                      onclick="return confirm('Are sure to delete ?')"><i
+                        class="fas fa-trash"></i></a>
+
+                  </td>
+
+                </tr>
+                {{/if}}
+                {{/each}}
+              
+
+              </tbody>
+            </table>
+ 
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade"  id="addSchedule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Schedule</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+        
+         <div class="form-group doctorname">
+             
+          </div>
+         
+          <div class="form-group">
+             <label for="selectDoc">Select Doctor</label>
+          <select class="form-control addUserId" id="selectDoc">  
+          </select>
+          </div>
+          <div class="form-group">
+            <label for="user1">Schedule Date</label>
+          <div class=" date " data-provide="datepicker">
+            
+            <input type="text" class="form-control " name="scheduleDate" id="add-scheduleDate">
+            <div class="input-group-addon">
+              <span class="glyphicon glyphicon-th"></span>
+            </div>
+          </div>
+          </div>
+          <div class="form-group">
+               
+                  <label for="timepkr" >Start Time</label>
+                  <div class='input-group border border-secondary rounded'>
+               <input type='text' name="startTime" class="form-control"  id='timepkr' />
+               <a class="btn" onclick="showpickers('timepkr',12)" style="width:40px;float:left"><i class="fas fa-clock text-primary"></i></a>
+            </div>
+             
+            </div>
+           
+          
+          <div class=" form-group">
+            
+            <label for="timepkr2">End Time</label>
+              <div class='input-group border border-secondary rounded'>
+            <input type="text" name="endTime" class="form-control" id='timepkr2' />
+              <a class="btn" onclick="showpickers('timepkr2',12)" style="width:40px;float:left"><i class="fas fa-clock text-primary"></i></a>
+            </div>
+          </div>
+
+
+      </div>
+      <div class="timepicker"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-goback addSubmit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+            
+
+<!-- Modal -->
+<div class="modal fade"  id="editSchedule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Schedule</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+   
+      <div class="modal-body">
+        <form action="/admin/update-schedule" method="POST">
+
+
+          <div class="form-group">
+              <div class="formdate">
+                <label class="control-label" for="date">Schedule Date</label>
+                <input class="form-control" id="edit-scheduleDate" name="scheduleDate" placeholder="MM/DD/YYY" type="date" value="{{userData.DoB}}" />
+              </div>
+            <div class="dates">
+            <label for="user1">Schedule Date</label>
+            <input type="text" id="edit-scheduleDate" autocomplete="off" class="form-control" name="scheduleDate" required />
+            
+
+              </div>
+          </div>
+          <div class="form-group">
+               
+                  <label for="timepkr" >Start Time</label>
+                  <div class='input-group border border-secondary rounded'>
+               <input type='text' id="startTime" name="startTime" class="form-control"  required/>
+               <a class="btn" onclick="showpickers('startTime',12)" style="width:40px;float:left"><i class="fas fa-clock text-primary"></i></a>
+            </div>
+             
+            </div>
+           
+          
+          <div class=" form-group">
+            
+            <label for="timepkr2">End Time</label>
+              <div class='input-group border border-secondary rounded'>
+            <input type="text" id="endTime" name="endTime" class="form-control"  required/>
+              <a class="btn" onclick="showpickers('endTime',12)" style="width:40px;float:left"><i class="fas fa-clock text-primary"></i></a>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="consTime">Consulting Time</label>
+            <input type="text" id="edit-consTime" name="consTime" class="form-control" required/>
+          </div>
+
+   <div class="form-group d-none">
+            
+            <input type="text" id="schedId" name="_id" class="form-control"/>
+          </div>
+      </div>
+    
+      <div class="timepicker"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+        <button type="submit" id="editSubmit" value="{{this._id}}" class="btn btn-goback editSubmit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{> admin/footer}}
+
+<script>
+  $(document).ready(function () {
+  
+  $('#scheduleTable').DataTable();
+
+  });
+</script>
+<script>
+$(document).ready(function(){
+
+$(document).on('click','.editBtn',function(e){
+
+  let schedId = $(this).val()
+let userId = $("#iduser").val()
+
+   $.ajax({
+        url : '/admin/edit-schedule',
+        type : 'GET',
+        data:{
+          schedId : schedId,
+          userId:userId
+        },
+       
+        success : function(data) {
+         
+          $.each(data,function(key,value) {
+            $('#edit-scheduleDate').val(value['scheduleDate']);
+            $('#startTime').val(value['startTime']);
+            $('#endTime').val(value['endTime']);
+            $('#edit-consTime').val(value['consTime']);
+             $('#schedId').val(value['_id']);
+          })
+          $('#editSchedule').modal('show');
+        },
+        error : function() {
+            alert('There is an error');
+        }
+    })
+})
+
+  });
+
+</script>
+
+<script>
+  $(document).ready(function () {
+
+    $(document).on('click', '#addBtn', function (e) {
+      $("#selectDoc").empty();
+
+      $.ajax({
+        url: '/admin/doctor-names',
+        type: 'GET',
+
+        success: function (data) {
+
+          $.each(data, function (key, value) {
+
+            $('#selectDoc').append(
+              '<option class="selected-userId" value="' + value['_id'] + '" >' + value['firstname'] + '</option>'
+            )
+          })
+
+          $('#addSchedule').modal('show');
+
+        },
+        error: function () {
+          alert('There is an error');
+        }
+      })
+    })
+
+
+
+
+  });
+
+</script>
+
+<script>
+$(document).ready(function(){
+
+$(document).on('click','.addSubmit',function(e){
+
+ 
+let userId = $(".selected-userId").val()
+console.log(userId)
+let scheduleDate = $("#add-scheduleDate").val()
+let startTime = $("#timepkr").val()
+let endTime = $("#timepkr2").val()
+let consTime = $("#consTime").val()
+   $.ajax({
+        url : '/admin/add-schedule',
+        type : 'POST',
+        data:{
+          userId:userId,
+          scheduleDate:scheduleDate,
+          startTime:startTime,
+          endTime:endTime,
+          consTime:consTime
+        },
+       
+        success : function(data) {
+         
+       
+          $('#editSchedule').modal('show');
+        },
+        error : function() {
+            alert('There is an error');
+        }
+    })
+})
+
+  });
+
+</script>
+
+
+
+
+
+     

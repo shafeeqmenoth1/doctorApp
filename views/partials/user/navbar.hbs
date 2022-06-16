@@ -1,0 +1,82 @@
+ <!----------User Links---------->
+<!-- Favicons -->
+<link href="/assets/img/favicon.png" rel="icon">
+<link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+  rel="stylesheet">
+
+<!-- Vendor CSS Files -->
+<link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link href="/vendor/animate.css/animate.min.css" rel="stylesheet">
+<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+<link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+<link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+<link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link href="/stylesheets/style.css" rel="stylesheet">
+
+
+<body class="container-fluid">
+  
+
+<!-- ======= Top Bar ======= -->
+<div id="topbar" class="d-flex align-items-center fixed-top">
+  <div class="container d-flex justify-content-between">
+    <div class="contact-info d-flex align-items-center">
+      <i class="bi bi-envelope"></i> <a href="mailto:contact@example.com">contact@example.com</a>
+      <i class="bi bi-phone"></i> +1 5589 55488 55
+    </div>
+    <div class="d-none d-lg-flex social-links align-items-center">
+      <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+      <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+      <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+  <div class="container d-flex align-items-center">
+
+    <h1 class="logo me-auto"><a href="index.html">Medilab</a></h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+    <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+        <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+        <li><a class="nav-link scrollto" href="#departments">Departments</a></li>
+        <li><a class="nav-link scrollto" href="#doctors">Doctors</a></li>
+
+        <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+    {{#if user}}
+    <div class="dropdown">
+      <a class="btn appointment-btn text-light dropdown-toggle" type="button" id="dropdownMenuButton"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Hi, {{user.firstname}}
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/patient-dash">Dashboard</a>
+        <a class="dropdown-item" href="/patient-profile">Profile</a>
+
+        <a class="dropdown-item btn btn-default" href="/auth/logout">Logout</a>
+
+      </div>
+    </div>
+    {{else}}
+    <a href="/auth/login" class="appointment-btn scrollto">
+      <span class="d-none d-md-inline">Login / Register</a>
+    {{/if}}
+  </div>
+</header><!-- End Header -->

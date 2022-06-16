@@ -1,0 +1,26 @@
+<style>
+    p{
+        margin: 0;
+    }
+.messagebox{
+    display: flex;
+   
+    justify-content: center;
+}
+.message{
+  
+    width: 50%;
+}
+</style>
+
+{{#if messages}}
+{{#each messages}}
+<div class="messagebox">  
+
+ <p class="alert alert-{{@key}}">{{this}}</p>
+
+</div>
+
+</div>
+{{/each}}
+{{/if}}

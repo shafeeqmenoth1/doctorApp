@@ -1,0 +1,474 @@
+
+<link href="/stylesheets/mobiscroll.javascriptSL.min.css" rel="stylesheet" />
+<script src="/javascripts/mobiscroll.javascriptSL.min.js"></script>
+
+{{> doctor/header}}
+
+{{> flash-message}}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Schedule Management</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/doctors">Home</a></li>
+            <li class="breadcrumb-item active">Schedule list</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+
+          <!-- /.card-header -->
+          <div class="card-body p-3 table-responsive p-0">
+            <div class="add-button d-flex justify-content-end">
+              
+              <a class="btn btn-primary mb-3 mr-3 btn-goback" data-toggle="modal" data-target="#addScheduleDate">Add
+                Schedule Date</a>
+              
+            </div>
+           
+            <table class="table table-hover text-nowrap" id="patientTable">
+              <thead>
+                <tr>
+                  <th>Sl.no</th>
+                  <th>Schedule Date</th>
+                
+                  <th class="col-md-6">Slots</th>
+                  {{!-- <th>Status</th> --}}
+                  <th >Actions</th>
+                   
+                </tr>
+              </thead>
+              <tbody>
+                {{#each schedulesDate}}
+                <tr id="sched-id" >
+                  <a class="schedule-id d-none">{{this._id}}</a>
+                  <td>{{inc @index}}</td>
+                  <td>{{this.date}}</td>
+                  
+                <td class=" d-flex flex-wrap">
+{{#each this.slots}}
+  {{#if this.isBooked}}
+                  <a  class="badge badge-secondary text-light m-1 text-right scheduledateBKD" >
+                  {{this.time}}</a> 
+                  {{else}}
+<a class="badge badge-primary text-light m-1">{{this.time}}</a>
+{{/if}}
+{{/each}}
+                </td>
+               
+                 
+                  {{!-- <td>
+                    {{#if this.isActive}}
+                    <a class="btn btn-outline-success" href="/doctors/unblock-sched/{{this._id}}">Active</a>
+                    {{else}}
+                    <a class="btn  btn-outline-danger" href="/doctors/block-sched/{{this._id}}">Inactive</a>
+                    {{/if}}
+                  </td> --}}
+                   
+                  <td>
+                  
+                    {{!-- <button class="btn text-primary editBtn" value="{{this._id}}" id="editSchedule-btn"  data-target="#editSchedule" data-toggle="modal"
+                     ><i class="fas fa-pen"></i></button> --}}
+
+                    <a class="btn text-danger" href="/doctors/delete-schedule/{{this._id}}"
+                      onclick="return confirm('Are sure to delete ?')"><i
+                        class="fas fa-trash"></i></a>
+                  <button class="btn btn-primary mr-3 btn-goback addslot" value="{{this._id}}"  
+                   data-toggle="modal" data-target="#addScheduleSlots">Add
+                    Slots</button>
+                  </td>
+              
+                
+               
+                </tr>
+                {{/each}}
+
+              </tbody>
+            </table>
+ 
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade"  id="addScheduleDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Schedule</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body bootstrap-iso">
+        <form action="/doctors/add-schedule-date" method="POST">
+
+<div class="form-group ">
+  <label>
+   Schedule Date
+    <input id="calendar" type="text" name="date" mbsc-input placeholder="Please select..." />
+</label>
+{{!-- 
+  <label class="control-label" for="date">Schedule Date</label>
+  <input class="form-control" id="date" name="date" placeholder="DD/MM/YYY" type="text"  /> --}}
+</div>
+
+
+
+          {{!-- <div class="form-group">
+               
+                  <label for="timepkr" >Start Time</label>
+                  <div class='input-group border border-secondary rounded'>
+               <input type='text' name="startTime" class="form-control"  id='timepkr' required/>
+               <a class="btn" onclick="showpickers('timepkr',12)" style="width:40px;float:left"><i class="fas fa-clock text-primary"></i></a>
+            </div>
+             
+            </div>
+            --}}
+{{!--           
+          <div class=" form-group">
+            
+            <label for="timepkr2">End Time</label>
+              <div class='input-group border border-secondary rounded'>
+            <input type="text" name="endTime" class="form-control" id='timepkr2' required/>
+              <a class="btn" onclick="showpickers('timepkr2',12)" style="width:40px;float:left"><i class="fas fa-clock text-primary"></i></a>
+            </div>
+          </div> --}}
+          {{!-- <div class="form-group">
+            <label for="exampleInputPassword1">Consulting Time</label>
+            <input type="text" id="consTime" name="consTime" class="form-control" id="consTime" placeholder="" required />
+          </div> --}}
+
+
+      </div>
+    
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-goback">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+sheduledDate
+     <!----Modal For Slots-->       
+<div class="modal fade"  id="addScheduleSlots" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Schedule</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body bootstrap-iso">
+        <form action="" method="POST" id="slotForm">
+
+
+<div class="form-group ">
+  <label>
+   Schedule Date
+    <input id="sheduledDate" type="text" name="date" mbsc-input/>
+</label>
+</div>
+
+<div class="form-group ">
+  <label>
+    Select Slots
+    <input mbsc-input id="my-input" data-dropdown="true" data-tags="true" />
+</label>
+<select id="multiple-select" name="slots" multiple>
+    <option value="8:00 AM">8:00 AM</option>
+    <option value="8:15 AM">8:15 AM</option>
+    <option value="8:30 AM">8:30 AM</option>
+    <option value="8:45 AM">8:45 AM</option>
+    <option value="9:00 AM">9:00 AM</option>
+    <option value="9:15 AM">9:15 AM</option>
+    <option value="9:30 AM">9:30 AM</option>
+    <option value="9:45 AM">9:45 AM</option>
+    <option value="10:00 AM">10:00 AM</option>
+    <option value="10:15 AM">10:15 AM</option>
+    <option value="10:30 AM">10:30 AM</option>
+    <option value="10:45 AM">10:45 AM</option>
+    <option value="11:00 AM">11:00 AM</option>
+    <option value="11:15 AM">11:15 AM</option>
+    <option value="11:30 AM">11:30 AM</option>
+    <option value="11:45 AM">11:45 AM</option>
+    <option value="12:00 PM">12:00 PM</option>
+    <option value="12:15 PM">12:15 PM</option>
+    <option value="12:30 PM">12:30 PM</option>
+    <option value="12:45 PM">12:45 PM</option>
+    <option value="01:00 PM">01:00 PM</option>
+    <option value="01:15 PM">01:15 PM</option>
+    <option value="01:30 PM">01:30 PM</option>
+    <option value="01:45 PM">01:45 PM</option>
+    <option value="02:00 PM">02:00 PM</option>
+    <option value="02:15 PM">02:15 PM</option>
+    <option value="02:30 PM">02:30 PM</option>
+    <option value="02:45 PM">02:45 PM</option>
+    <option value="03:00 PM">03:00 PM</option>
+    <option value="03:15 PM">03:15 PM</option>
+    <option value="03:30 PM">03:30 PM</option>
+    <option value="03:45 PM">03:45 PM</option>
+    <option value="04:00 PM">04:00 PM</option>
+    <option value="04:15 PM">04:15 PM</option>
+    <option value="04:30 PM">04:30 PM</option>
+    <option value="04:45 PM">04:45 PM</option>
+    <option value="05:00 PM">05:00 PM</option>
+    <option value="05:15 PM">05:15 PM</option>
+    <option value="05:30 PM">05:30 PM</option>
+    <option value="05:45 PM">05:45 PM</option>
+    <option value="06:00 PM">06:00 PM</option>
+    <option value="06:15 PM">06:15 PM</option>
+    <option value="06:30 PM">06:30 PM</option>
+    <option value="06:45 PM">06:45 PM</option>
+    <option value="07:00 PM">07:00 PM</option>
+    <option value="07:15 PM">07:15 PM</option>
+    <option value="07:30 PM">07:30 PM</option>
+    <option value="07:45 PM">07:45 PM</option>
+    <option value="08:00 PM">08:00 PM</option>
+    <option value="08:15 PM">08:15 PM</option>
+    <option value="08:30 PM">08:30 PM</option>
+    <option value="08:45 PM">08:45 PM</option>
+    <option value="9:00 PM">9:00 PM</option>
+    <option value="9:15 PM">9:15 PM</option>
+    <option value="9:30 PM">9:30 PM</option>
+    <option value="9:45 PM">9:45 PM</option>
+    <option value="10:00 PM">10:00 PM</option>
+    <option value="10:15 PM">10:15 PM</option>
+    <option value="10:30 PM">10:30 PM</option>
+    <option value="10:45 PM">10:45 PM</option>
+    <option value="11:00 PM">11:00 PM</option>
+    <option value="11:15 PM">11:15 PM</option>
+    <option value="11:30 PM">11:30 PM</option>
+    <option value="11:45 PM">11:45 PM</option>
+    <option value="12:00 AM">12:00 AM</option>
+    <option value="12:15 AM">12:15 AM</option>
+    <option value="12:30 AM">12:30 AM</option>
+    <option value="12:45 AM">12:45 AM</option>
+    <option value="01:00 AM">01:00 AM</option>
+    <option value="01:15 AM">01:15 AM</option>
+    <option value="01:30 AM">01:30 AM</option>
+    <option value="01:45 AM">01:45 AM</option>
+    <option value="02:00 AM">02:00 AM</option>
+    <option value="02:15 AM">02:15 AM</option>
+    <option value="02:30 AM">02:30 AM</option>
+    <option value="02:45 AM">02:45 AM</option>
+    <option value="03:00 AM">03:00 AM</option>
+    <option value="03:15 AM">03:15 AM</option>
+    <option value="03:30 AM">03:30 AM</option>
+    <option value="03:45 AM">03:45 AM</option>
+    <option value="04:00 AM">04:00 AM</option>
+    <option value="04:15 AM">04:15 AM</option>
+    <option value="04:30 AM">04:30 AM</option>
+    <option value="04:45 AM">04:45 AM</option>
+    <option value="05:00 AM">05:00 AM</option>
+    <option value="05:15 AM">05:15 AM</option>
+    <option value="05:30 AM">05:30 AM</option>
+    <option value="05:45 AM">05:45 AM</option>
+    <option value="06:00 AM">06:00 AM</option>
+    <option value="06:15 AM">06:15 AM</option>
+    <option value="06:30 AM">06:30 AM</option>
+    <option value="06:45 AM">06:45 AM</option>
+    <option value="07:00 AM">07:00 AM</option>
+    <option value="07:15 AM">07:15 AM</option>
+    <option value="07:30 AM">07:30 AM</option>
+    <option value="07:45 AM">07:45 AM</option>
+    
+    
+    
+ 
+</select>
+</div>
+
+
+
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+        <button type="submit" id="addSlot" class="btn btn-goback">Add</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+{{!-- <div class="modal fade"  id="editSchedule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Schedule</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+   
+      <div class="modal-body">
+        <form action="/doctors/update-schedule" method="POST">
+
+
+          <div class="form-group">
+            <div class="dates">
+            <label for="user1">Schedule Date</label>
+            <input type="text" id="edit-scheduleDate" autocomplete="off" class="form-control" name="scheduleDate" required />
+            
+
+              </div>
+          </div>
+          <div class="form-group">
+               
+                  <label for="timepkr" >Start Time</label>
+                  <div class='input-group border border-secondary rounded'>
+               <input type='text' id="startTime" name="startTime" class="form-control"  required/>
+               <a class="btn" onclick="showpickers('startTime',12)" style="width:40px;float:left"><i class="fas fa-clock text-primary"></i></a>
+            </div>
+             
+            </div>
+           
+          
+          <div class=" form-group">
+            
+            <label for="timepkr2">End Time</label>
+              <div class='input-group border border-secondary rounded'>
+            <input type="text" id="endTime" name="endTime" class="form-control" required />
+              <a class="btn" onclick="showpickers('endTime',12)" style="width:40px;float:left"><i class="fas fa-clock text-primary"></i></a>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="consTime">Consulting Time</label>
+            <input type="text" id="edit-consTime" name="consTime" class="form-control" required/>
+          </div>
+
+   <div class="form-group d-none">
+            <label for="schedId">Consulting Time</label>
+            <input type="text" id="schedId" name="_id" class="form-control"/>
+          </div>
+      </div>
+    
+      <div class="timepicker"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+        <button type="submit" id="editSubmit" value="{{this._id}}" class="btn btn-goback editSubmit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> --}}
+
+{{> doctor/footer}}
+
+<script>
+  $(document).ready(function () {
+  
+  $('#patientTable').DataTable();
+
+  });
+
+
+$(document).ready(function(){
+
+$(document).on('click','.addslot',function(e){
+  e.preventDefault();
+  let schedId = $(this).val()
+console.log(schedId)
+   $.ajax({
+        url : '/doctors/get-date',
+        type : 'GET',
+        data:{
+          schedId : schedId
+        },
+       
+        success : function(data) {
+          const newDate=moment(data).format('ll')
+          $('#sheduledDate').val(newDate);
+       
+        },
+        error : function() {
+            alert('There is an error');
+        }
+    })
+    $(document).on('click','#addSlot',function(e){
+      e.preventDefault()
+      const slots = $("#multiple-select").val()
+     
+       $.ajax({
+        url : '/doctors/add-slots',
+        type : 'POST',
+        data:{
+          schedId : schedId,
+          slots:slots
+        },
+       success:function(status){
+         if(status){
+       location.href = '/doctors/schedule-list'
+         }
+       
+       }
+  
+    })
+
+    })
+
+})
+ 
+
+  
+
+  });
+
+</script>
+
+
+
+
+
+
+     {{!-- <script>
+    $(document).ready(function () {
+        var date_input = $('input[name="date"]'); //our date input has the name "date"
+        var container = $('.bootstrap-iso .form').length > 0 ? $('.bootstrap-iso .form').parent() : "body";
+        var options = {
+            format: 'dd/mm/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+            startDate: new Date()
+        };
+        date_input.datepicker(options);
+    })
+</script> --}}
+<script>
+ mobiscroll.datepicker('#calendar', {
+    controls: ['calendar'],
+    min: new Date()
+
+});
+</script>
+
+<script>
+mobiscroll.select('#multiple-select', {
+    inputElement: document.getElementById('my-input'),
+    touchUi: false
+});
+</script>

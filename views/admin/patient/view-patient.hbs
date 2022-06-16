@@ -1,0 +1,100 @@
+
+{{> admin/header}}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">View Patient Details</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+              <li class="breadcrumb-item active">Patient Details </li>
+          </div><!-- /.col -->
+          <div class="container">
+       <div class="modal-body">
+        <!-- Modal body -->
+        <div class="col-md-5 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex flex-column align-items-center text-center">
+                <img src="/images/uploads/{{user.profileImg}}" alt="Admin" class="rounded-circle"
+                  width="150">
+                <div class="mt-3">
+                  <h4>{{user.firstname}} {{user.lastname}}</h4>
+                  <p class="text-secondary mb-1"></p>
+                  <a class="btn btn-outline-success"><i class="fab fa-whatsapp"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="card mb-3">
+            <div class="card-body">
+              
+              <div class="row">
+                <div class="col-md-6 ">
+                  <h6 class="mb-0">Fist Name : &emsp; <span class="text-secondary text-end">{{user.firstname}}</span> </h6>
+                </div>
+               <div class="col-md-6 ">
+                  <h6 class="mb-0">Last Name : &emsp; <span class="text-secondary text-center ">{{user.lastname}}</span> </h6>
+                </div>
+              </div>
+              <hr>
+               <div class="row">
+                <div class="col-md-6 ">
+                  <h6 class="mb-0">Email : &emsp; <span class="text-secondary text-end">{{user.email}}</span> </h6>
+                </div>
+               <div class="col-md-6 ">
+                  <h6 class="mb-0">Mobile No : &emsp; <span class="text-secondary text-center ">{{user.mobile}}</span> </h6>
+                </div>
+              </div>
+            
+              <hr>
+               <div class="row">
+                <div class="col-md-6 ">
+                  <h6 class="mb-0">Gender : &emsp; <span class="text-secondary text-end">{{user.gender}}</span> </h6>
+                </div>
+               <div class="col-md-6 ">
+                  <h6 class="mb-0">Date of Birth : &emsp;<span class="text-secondary text-center ">{{user.DoB}}</span> </h6>
+                </div>
+              </div>
+           
+              <hr>
+              <div class="row">
+                <div class="col-md-6 ">
+                  <h6 class="mb-0">Blood Group : &emsp; <span class="text-secondary text-end">{{user.blood}}</span> </h6>
+                </div>
+              
+              </div>
+
+              
+              <hr>
+              <div class="row">
+                <div class="col-md-12 ">
+                  <h6 class="mb-0">Address : &emsp; <span class="text-secondary text-end">{{user.address}}</span> </h6>
+                </div>
+              
+              </div>
+            
+             
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-goback" onclick="history.back()" data-dismiss="modal">Go Back</button>
+              {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+            </div>
+          </div>
+        </div>
+      </div>
+        </div>
+
+
+</div>
+</div>
+    </div>
+</div>
+
+{{> admin/footer}}

@@ -1,0 +1,89 @@
+{{> doctor/header}}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Appointment Management</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/doctors">Home</a></li>
+                        <li class="breadcrumb-item active">Patient list</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+
+                    <!-- /.card-header -->
+                    <div class="card-body p-3 table-responsive p-0">
+
+                        <table class="table table-hover text-nowrap" id="patientTable">
+                            <thead>
+                                <tr>
+                                    <th>Sl.no</th>
+                                    <th>Patient name</th>
+                                    <th>Appointment Date</th>
+                                    <th>Appointment Time</th>
+                                    <th>Contact No</th>
+                               
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each appointData}}
+                                <tr>
+                                    <td>{{inc @index}}</td>
+                                    <td>{{this.patientname}}</td>
+                                    <td>{{this.appointmentDate}}</td>
+                                    <td>{{this.appointmentTime}}</td>
+                                    <td>{{this.mobile}}</td>
+                                    <td>{{this.status}}</td>
+
+                              
+                                    <td>
+                                        <a href="/admin/view-patient/{{this._id}}" type="button" onclick=""
+                                            class="btn text-success">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+
+
+                                        <a class="btn text-primary" href="/doctors/edit-appointment/{{this._id}}"><i
+                                                class="fas fa-pen"></i></a>
+
+                                        <a class="btn text-danger" href="/doctors/delete-appointment/{{this._id}}"
+                                            onclick="return confirm('Are you sure you want to delete ?')"><i
+                                                class="fas fa-trash"></i></a>
+
+                                    </td>
+
+                                </tr>
+                                {{/each}}
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{{> doctor/footer}}
+
+<script>
+    $(document).ready(function () {
+        $('#patientTable').DataTable();
+    });
+</script>

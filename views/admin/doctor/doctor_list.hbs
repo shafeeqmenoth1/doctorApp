@@ -1,0 +1,98 @@
+{{> admin/header}}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Doctor Management</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+            <li class="breadcrumb-item active">Doctor list</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+
+          <!-- /.card-header -->
+          <div class="card-body p-3 table-responsive p-0">
+            <div class="add-button d-flex justify-content-end">
+              <a href="/admin/add-doctor" class="btn btn-primary mb-3 mr-3 btn-goback">Add Doctors</a>
+            </div>
+            <table class="table table-hover text-nowrap" id="patientTable">
+              <thead>
+                <tr>
+                  <th>Sl.no</th>
+                  <th>image</th>
+                  <th>First name</th>
+                  <th>Last name</th>
+                  <th>Email</th>
+                  <th>Gender</th>
+                  <th>Contact no</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each doctors}}
+                <tr>
+                  <td>{{inc @index}}</td>
+                  <td > <div class="user-img-box">
+                     <img class="user-img" src="/images/uploads/{{this.profileImg}}" alt="profile-img"></div></td>
+                  <td>{{this.firstname}}</td>
+                  <td>{{this.lastname}}</td>
+                  <td>{{this.email}}</td>
+                  <td>{{this.gender}}</td>
+                  <td>{{this.mobile}}</td>
+
+                  <td>
+                    {{#if this.isActive}}
+                    <a class="btn btn-outline-success" href="/admin/unblock-user/{{this._id}}">Active</a>
+                    {{else}}
+                    <a class="btn  btn-outline-danger" href="/admin/block-user/{{this._id}}">Inactive</a>
+                    {{/if}}
+                  </td>
+                  <td>
+                    <a href="/admin/view-patient/{{this._id}}" type="button" onclick="" class="btn text-success">
+                      <i class="fas fa-eye"></i>
+                    </a>
+
+
+                    <a class="btn text-primary" href="/admin/edit-patient/{{this._id}}"><i class="fas fa-pen"></i></a>
+
+                    <a class="btn text-danger" href="/admin/delete-doctor/{{this._id}}"
+                      onclick="return confirm('Are sure to delete {{this.firstname}} ?')"><i
+                        class="fas fa-trash"></i></a>
+
+                  </td>
+
+                </tr>
+                {{/each}}
+
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{{> admin/footer}}
+
+<script>
+  $(document).ready(function () {
+    $('#patientTable').DataTable();
+  });
+</script>

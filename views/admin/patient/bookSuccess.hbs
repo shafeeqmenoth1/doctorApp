@@ -1,0 +1,51 @@
+<style>
+    .message-wrapper{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .message-box{
+        max-width: 450px;
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        background-color: #eeee;
+        padding:25px 15px;
+    }
+     .message-box .mesaage-content{
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         flex-direction: column;
+     }
+     .message-box .mesaage-content i{
+         font-size: 40px;
+         margin-bottom: 10px;
+         color: green;
+     }
+      .message-box .mesaage-content h4{
+          font-size: 32px;
+          font-weight: 500;
+          color: #444444;
+        
+      }
+       .message-box .mesaage-content a{
+          font-size: 16px;
+          color: #444444;
+       }
+</style>
+
+<div class="container-fluid bg-secondary">
+    <div class="message-wrapper">
+        <div class="message-box">
+            <div class="mesaage-content">
+                <i class="fas fa-check-circle"></i>
+                <h4>Your Appointment is <br>successfully registered</h4>
+                <a>Your booking has been confirmed.</a><a> Check your email for details</a>
+                <a href="/patient-dash" class="btn btn-goback mt-3">View Your Appointment</a>
+            </div>
+    </div>
+    </div>
+</div>

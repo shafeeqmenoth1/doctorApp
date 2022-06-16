@@ -1,0 +1,103 @@
+{{> admin/header}}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Appointment Management</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+            <li class="breadcrumb-item active">Appointment list</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+
+          <!-- /.card-header -->
+          <div class="card-body p-3 table-responsive p-0">
+            <table class="table table-hover text-nowrap" id="patientTable">
+              <thead>
+                <tr>
+                  <th>Sl.no</th>
+                  <th>Patient Name</th>
+                   <th>Address</th>
+                    <th>Contact No</th>
+                  <th>Doctor Name</th>
+                  <th>Department</th>
+                  <th>Date</th>
+                   <th>Time</th>
+                
+                  <th>Status</th>
+                    <th>Payment Method</th>
+                  <th>Action</th>
+                 
+                </tr>
+              </thead>
+              <tbody>
+                {{#each appointData}}
+                <tr>
+                  <td>{{inc @index}}</td>
+                  <td>{{this.patientname}}</td>
+                   <td>{{this.address}}</td>
+                  <td>{{this.mobile}}</td>
+                  <td>{{this.doctorname}}</td>
+                    <td>{{this.speciality}}</td>
+                  <td>{{this.appointmentDate}}</td>
+                  <td>{{this.appointmentTime}}</td>
+                   <td>{{this.status}}</td>
+                   <td>{{this.paymentmethod}}</td>
+
+                  {{!-- <td>
+                    {{#if this.isActive}}
+                    <a class="btn btn-outline-success" href="/admin/unblock-user/{{this._id}}">Active</a>
+                    {{else}}
+                    <a class="btn  btn-outline-danger" href="/admin/block-user/{{this._id}}">Inactive</a>
+                    {{/if}}
+                  </td> --}}
+                  <td>
+                    {{!-- <a href="/admin/view-patient/{{this._id}}" type="button" onclick="" class="btn text-success">
+  <i
+                        class="fas fa-eye"></i>
+                    </a> --}}
+
+                    <a class="btn text-danger" href="/admin/delete-appointment/{{this._id}}"
+                      onclick="return confirm('Are sure to delete ?')"><i
+                        class="fas fa-trash"></i></a>
+
+                  </td>
+
+                </tr>
+                {{/each}}
+
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{{> admin/footer}}
+
+<script>
+  $(document).ready(function () {
+    $('#patientTable').DataTable();
+  });
+</script>
+
+
+
+

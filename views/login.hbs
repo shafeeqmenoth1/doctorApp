@@ -1,0 +1,126 @@
+
+<style>
+  .bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}
+          .Neon {
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #494949;
+    position: relative;
+    
+
+}
+.submit-btn{
+  background-color: #1977cc;
+  color: #fff;
+  border-radius: 30px;
+  width: 50%;
+}
+.submit-btn:hover{
+   background: #1c84e3;
+  color: #fff;
+  text-decoration: none;
+}
+
+.Neon * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.Neon-input-dragDrop {
+    display: block;
+    width: 343px;
+    margin: 0 auto 25px auto;
+    padding: 25px;
+    color: #8d9499;
+    color: #97A1A8;
+    background: #fff;
+    border: 2px dashed #C8CBCE;
+    text-align: center;
+    -webkit-transition: box-shadow 0.3s, border-color 0.3s;
+    -moz-transition: box-shadow 0.3s, border-color 0.3s;
+    transition: box-shadow 0.3s, border-color 0.3s;
+}
+.Neon-input-dragDrop .Neon-input-icon {
+    font-size: 48px;
+    margin-top: -10px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.Neon-input-text h3 {
+    margin: 0;
+    font-size: 18px;
+}
+.Neon-input-text span {
+    font-size: 12px;
+}
+.Neon-input-choose-btn.blue {
+    color: #008BFF;
+    border: 1px solid #008BFF;
+}
+.Neon-input-choose-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: bold;
+    color: #8d9496;
+    border-radius: 3px;
+    border: 1px solid #c6c6c6;
+    vertical-align: middle;
+    background-color: #fff;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.05);
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    transition: all 0.2s;
+}
+</style>
+
+<div class="mt-5">
+ {{> flash-message}}
+ </div>
+
+<section class=" gradient-custom">
+  <div class="container py-3">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Login Form</h3>
+
+          
+
+                <form action="/auth/login" method="post">
+   
+   
+     
+    <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="Jem@email.com" aria-describedby="emailHelp" required>
+  </div>
+   <div class="form-group">
+    <label for="exampleInputEmail1">Password</label>
+    <input type="password" class="form-control" id="exampleInputEmail1" name="password" value="123456" aria-describedby="emailHelp" required>
+  </div>
+ 
+       
+  <div class="button-div d-flex flex-column align-items-center">
+  <button type="submit" class="btn submit-btn btn-lg btn-block">Submit</button>
+  <p class="mt-2">If you don't register yet <a href="/auth/register" class="text-primary font-weight-bold">Register</a></p>
+ </div>
+  </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+

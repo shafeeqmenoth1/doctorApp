@@ -1,0 +1,300 @@
+<style>
+    .bootstrap-iso .formden_header h2,
+    .bootstrap-iso .formden_header p,
+    .bootstrap-iso form {
+        font-family: Arial, Helvetica, sans-serif;
+        color: black
+    }
+
+    .bootstrap-iso form button,
+    .bootstrap-iso form button:hover {
+        color: white !important;
+    }
+
+    .asteriskField {
+        color: red;
+    }
+
+    .Neon {
+        font-family: sans-serif;
+        font-size: 14px;
+        color: #494949;
+        position: relative;
+
+
+    }
+
+    .submit-btn {
+        background-color: #1977cc;
+        color: #fff;
+        border-radius: 30px;
+        width: 30%;
+    }
+
+    .submit-btn:hover {
+        background: #1c84e3;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .Neon * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .Neon-input-dragDrop {
+        display: block;
+        width: 180px;
+        margin: 0 auto 25px auto;
+        padding: 25px;
+        color: #366281;
+        color: #97A1A8;
+        background: #fff;
+        border: 2px dashed #C8CBCE;
+        text-align: center;
+        -webkit-transition: box-shadow 0.3s, border-color 0.3s;
+        -moz-transition: box-shadow 0.3s, border-color 0.3s;
+        transition: box-shadow 0.3s, border-color 0.3s;
+    }
+
+    .Neon-input-dragDrop .Neon-input-icon {
+        font-size: 48px;
+        margin-top: -10px;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+    }
+
+    .Neon-input-text h3 {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    .Neon-input-text span {
+        font-size: 12px;
+    }
+
+    .Neon-input-choose-btn.blue {
+        color: #008BFF;
+        border: 1px solid #008BFF;
+    }
+
+    .Neon-input-choose-btn {
+        display: inline-block;
+        padding: 8px 14px;
+        outline: none;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        white-space: nowrap;
+        font-size: 12px;
+        font-weight: bold;
+        color: #8d9496;
+        border-radius: 3px;
+        border: 1px solid #c6c6c6;
+        vertical-align: middle;
+        background-color: #fff;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.05);
+        -webkit-transition: all 0.2s;
+        -moz-transition: all 0.2s;
+        transition: all 0.2s;
+    }
+    /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+</style>
+{{> admin/header}}
+
+<div class="mt-5">
+    {{> flash-message}}
+</div>
+<section class=" gradient-custom ">
+    <div class="container py-5">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-lg-9 col-xl-7">
+                <div class="card shadow-2-strong card-registration bootstrap-iso" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Add Doctor</h3>
+                        <form action="/admin/add-doctor" method="post" enctype="multipart/form-data" >
+                            <div class="row">
+
+        <div class="Neon Neon-theme-dragdropbox form-group col-md-6 mb-3 ">
+            <input
+                style="z-index: 999; opacity: 0; width: 320px; height: 200px; position: absolute; right: 0px; left: 0px; margin-right: auto; margin-left: auto;"
+                name="profileImg" id="filer_input2" type="file">
+            <div class="Neon-input-dragDrop">
+                <div class="Neon-input-inner">
+                    <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>
+                    <div class="Neon-input-text">
+                        <h3>Drag&amp;Drop files here</h3> <span style="display:inline-block; margin: 15px 0">or</span>
+                    </div><a class="Neon-input-choose-btn blue">Browse Files</a>
+                </div>
+            </div>
+        </div>
+                                <div class="form-group col-md-6 mb-3">
+                                <div class="row">
+                                    <div class="form-group col-md-12 mb-3">
+                                    <label for="exampleInputEmail1">First name</label>
+                                    <input type="text" class="form-control" id="firstName" name="firstname"
+                                        placeholder="Jem" value="{{userData.firstname}}" required>
+                                </div>
+                               
+                                <div class="form-group col-md-12 mb-3">
+                                    <label for="exampleInputEmail1">Last name</label>
+                                    <input type="text" class="form-control" id="lastName" name="lastname"
+                                        placeholder="jock" value="{{userData.lastname}}" required>
+                                </div>
+                                  <div class="form-group col-md-12 mb-3">
+                                    <label for="exampleInputEmail1">Consulting Fees ₹ </label>
+                                    <input type="number" class="form-control" id="fees" name="fees"
+                                        placeholder="Enter a Fees" value="{{userData.firstname}}" required>
+                                </div>
+                                 </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" name="email"
+                                    placeholder="Jem@email.com" aria-describedby="emailHelp" value="{{userData.email}}"
+                                    required>
+                            </div>
+                            </div>
+                          <div class="col-md-6 mb-3">
+                            <div class=" form-group">
+                                <label for="exampleInputEmail1">Mobile no</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" name="mobile"
+                                    value="9878212345" placeholder="+91 8212345678" aria-describedby="emailHelp"
+                                     required>
+                            </div>
+                            </div>
+                            </div>
+                                 <div class="row">
+
+                                <div class="col-md-6 mb-3">
+                                   
+                                        <div class="form-group ">
+                                          
+                                                <label class="control-label" for="date">Qualification</label>
+                                                <input class="form-control" id="qualification" name="qualification"
+                                                    type="text"/>
+                                            </div>
+                                </div>
+                          
+
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Speciality</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1" name="speciality"
+                                           >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-4 mb-3">
+                                    
+                             
+                                        
+                                        <div class="form-group ">
+                                            
+                                                <label class="control-label" for="date">Date of birth</label>
+                                                <input class="form-control" id="date" name="DoB" placeholder="DD/MM/YYY"
+                                                    type="text" value="{{userData.DoB}}" />
+                                            </div>
+                                      
+                                    
+                                </div>
+                                <div class="col-md-5 mb-3">
+                                    <label for="gender">Gender</label>
+                                    <select class="custom-select d-block w-100" id="gender" name="gender"
+                                        value="{{userData.gender}}" required>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Blood group</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1" name="blood"
+                                            value="{{userData.blood}}" placeholder="O+" aria-describedby="emailHelp">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="role" value="DOCTOR">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Address </label>
+                                <input type="text" name="address" class="form-control" id="address"
+                                    placeholder="House no, Street, city, Pin" value="{{userData.address}}">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password"
+                                            placeholder="" aria-describedby="emailHelp" value="123456" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Confirm Password</label>
+                                        <input type="password" class="form-control" id="password2" name="password2"
+                                            placeholder="" aria-describedby="emailHelp" value="123456" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="button-div d-flex flex-column align-items-center">
+                                <button type="submit" class="btn submit-btn btn-lg btn-block rounded-pill">Add
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        var date_input = $('input[name="DoB"]'); //our date input has the name "date"
+        var container = $('.bootstrap-iso .form').length > 0 ? $('.bootstrap-iso .form').parent() : "body";
+        var options = {
+            format: 'dd/mm/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+            
+        };
+        date_input.datepicker(options);
+    })
+</script>
+{{> admin/footer}}
+
+  <script>
+    function viewImg(event){
+      console.log(event)
+      document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+    }
+  </script>
